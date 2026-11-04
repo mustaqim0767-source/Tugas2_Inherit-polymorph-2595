@@ -23,3 +23,21 @@
    meong
    Tom memanjat
    Hewan dibuat: Generik
+
+## Jawaban Soal 3: Composition (has-a) dan Aliasing
+
+1. **Prediksi dan Output Baris Kedua Sebelum Perbaikan (Tanpa Defensive Copy):**
+   - **Tercetak:** `(100.0, 1.0)-(5.0, 5.0)`
+   - **Alasan:** Terjadi *aliasing*. Konstruktor `Garis` menyimpan referensi memori langsung dari variabel `t` luar (`this.awal = awal`), sehingga saat `t.setX(100)` dipanggil, data titik awal di dalam `g2` ikut berubah secara tidak sengaja.
+
+2. **Output Baris Kedua Setelah Perbaikan (Dengan Defensive Copy):**
+   - **Tercetak:** `(1.0, 1.0)-(5.0, 5.0)`
+   - **Alasan:** Konstruktor `Garis` membuat instans `Titik` baru (`new Titik(awal.getX(), awal.getY())`). Objek `t` di luar tidak lagi berbagi alamat memori dengan atribut di dalam `g2`.
+
+3. **Kapan Menggunakan Sebelum vs Sesudah Perbaikan:**
+   - **Sebelum Perbaikan (Shared Reference):** Tepat digunakan ketika kita memang memerlukan beberapa objek berbagi simpul (*node*) yang sama secara terpusat (contoh: graf terhubung, jaring-jaring geometri 3D di mana jika satu titik vertex digeser, seluruh garis ikatan ikut menyesuaikan).
+   - **Sesudah Perbaikan (Defensive Copy):** Tepat digunakan pada enkapsulasi ketat di mana objek `Garis` harus bersifat mandiri dan tidak boleh terpengaruh oleh efek samping perubahan variabel di luar kelas.
+
+4. **Masalah Desain Jika `Garis extends Titik` (Inheritance):**
+   - **Melanggar Relasi *is-a*:** Garis **bukanlah** sebuah Titik (*Garis is NOT a Titik*). Garis **memiliki** dua Titik (*Garis HAS-A Titik*).
+   - **Kerusakan Abstraksi:** Jika `Garis extends Titik`, maka `Garis` akan mewarisi atribut `x` dan `y` yang tidak relevan untuk sebuah garis utuh. Method seperti `setX()` pada `Garis` menjadi tidak jelas apakah mengubah titik awal atau titik akhir.
