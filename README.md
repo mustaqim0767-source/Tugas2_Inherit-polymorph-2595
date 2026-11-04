@@ -41,3 +41,19 @@
 4. **Masalah Desain Jika `Garis extends Titik` (Inheritance):**
    - **Melanggar Relasi *is-a*:** Garis **bukanlah** sebuah Titik (*Garis is NOT a Titik*). Garis **memiliki** dua Titik (*Garis HAS-A Titik*).
    - **Kerusakan Abstraksi:** Jika `Garis extends Titik`, maka `Garis` akan mewarisi atribut `x` dan `y` yang tidak relevan untuk sebuah garis utuh. Method seperti `setX()` pada `Garis` menjadi tidak jelas apakah mengubah titik awal atau titik akhir.
+
+
+## Jawaban Soal 4: Bagian Analisis Konsep
+
+1. **Perbedaan Method Overriding dan Method Overloading:**
+   - **Overriding** terjadi ketika subclass menulis ulang method yang sudah dideklarasikan di superclass dengan nama, parameter, dan return type yang persis sama. Contohnya method `hitungHargaAkhir()` di `ProdukDigital` meng-override method milik `Produk`. Ini berkaitan erat dengan **inheritance** dan **polimorfisme dinamis** (*runtime dynamic dispatch*).
+   - **Overloading** terjadi ketika beberapa method di kelas yang sama memiliki nama yang sama tetapi beda dalam jumlah atau tipe parameternya. Contohnya constructor `Garis(Titik, Titik)` dan `Garis(double, double, double, double)` pada Soal 3. Ini berkaitan dengan **polimorfisme statis** (*compile-time binding*).
+
+2. **Kapan Memilih Inheritance vs Composition:**
+   - **Inheritance (is-a)** dipilih ketika subclass merupakan bentuk spesialisasi dari superclass dan memenuhi prinsip substitusi (Liskov Substitution Principle). Contoh dari tugas ini: `Laptop extends Perangkat` (Laptop *adalah sebuah* Perangkat).
+   - **Composition (has-a)** dipilih ketika sebuah kelas dibentuk dari satu atau beberapa objek kelas lain sebagai komponen penyusunnya. Contoh dari tugas ini: `Keranjang` menyimpan daftar `Produk` (`Keranjang` *memiliki* `Produk`), atau `Garis` yang disusun dari dua `Titik`.
+
+3. **Penggunaan `instanceof` pada `cetakStruk()` vs `hitungPerJenis()` & Keamanan Downcasting:**
+   - Method `cetakStruk()` tidak memerlukan `instanceof` karena polimorfisme (dynamic dispatch) secara otomatis menentukan method `deskripsi()` dan `hitungHargaAkhir()` milik subclass yang sesuai saat eksekusi.
+   - Method `hitungPerJenis()` memerlukan `instanceof` karena tujuannya adalah melakukan pengelompokan statistik berdasarkan tipe konkret objek yang tersimpan dalam koleksi heterogen `ArrayList<Produk>`.
+   - **Downcasting tidak selalu aman** karena jika kita memaksakan menguji/mengonversi objek superclass ke tipe subclass yang salah (misalnya mengasumsikan `Produk` biasa sebagai `Langganan`), program akan melempar error runtime `ClassCastException`. Karena itu, downcasting selalu memerlukan pemeriksaan eksplisit menggunakan operator `instanceof`.
