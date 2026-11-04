@@ -5,7 +5,7 @@
 - **Nama Lengkap:** Mustaqim
 - **NPM:** 250810701100095
 - **Kelas Praktikum:** A
-- **Repository:** https://github.com/mustaqim0767-source/Tugas2_Inherit-polymorph-250810701100095
+- **Repository:** https://github.com/mustaqim0767-source/Tugas2_Inherit-polymorph-2595
 
 ## Jawaban Pertanyaan Tambahan Soal 1
 **Pesan Error:** `harga has private access in soal1.Perangkat`  
