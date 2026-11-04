@@ -10,3 +10,16 @@
 ## Jawaban Pertanyaan Tambahan Soal 1
 **Pesan Error:** `harga has private access in soal1.Perangkat`  
 **Penjelasan:** Atribut dengan akses `private` hanya dapat diakses langsung di kelas pemiliknya (`Perangkat`). Ketika subclass `Laptop` mengaksesnya di method `hitungHargaPromo()`, Java menolaknya. Agar subclass bisa mengakses atribut tersebut secara langsung, hak akses atribut harus diganti menjadi `protected`.
+
+## Jawaban Soal 2: Analisis Output, Error, dan Polimorfisme
+
+### Bagian A
+1. **Output Program (sebelum error runtime):**
+   ```text
+   Hewan dibuat: Tom
+   Kucing dibuat
+   Tom makan
+   meong
+   meong
+   Tom memanjat
+   Hewan dibuat: Generik
